@@ -11,20 +11,34 @@ function formatCurrencyID(value) {
   });
 }
 
+function setTargetContent(element, content, elementId) {
+  if (!element) {
+    console.warn(`[Peringatan] Elemen dengan ID "${elementId}" tidak ditemukan di HTML. Periksa ejaannya!`);
+    return;
+  }
+  
+  if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
+    element.value = content;
+  } else {
+    
+    element.innerText = content;
+  }
+}
+
 function updateRate() {
   const rawInput = worthFirstEl.value.trim();
 
   if (rawInput === "") {
     exchangeRateEl.innerText = "";
-    worthSecondEl.value = "";
+    setTargetContent(worthSecondEl, "", "worth-second");
     return;
   }
 
   const amount = Number(rawInput);
-
+  
   if (!Number.isFinite(amount) || Number.isNaN(amount)) {
     exchangeRateEl.innerText = "Masukkan angka yang valid";
-    worthSecondEl.value = "";
+    setTargetContent(worthSecondEl, "", "worth-second");
     return;
   }
 
@@ -40,17 +54,18 @@ function updateRate() {
       const rate = data?.conversion_rates?.[target];
       if (!Number.isFinite(rate)) {
         exchangeRateEl.innerText = "Kurs tidak tersedia";
-        worthSecondEl.value = "";
+        setTargetContent(worthSecondEl, "", "worth-second");
         return;
       }
 
       exchangeRateEl.innerText = `1 ${base} = ${formatCurrencyID(rate)} ${target}`;
       
-      worthSecondEl.value = formatCurrencyID(amount * rate);
+      const totalHasil = formatCurrencyID(amount * rate);
+      setTargetContent(worthSecondEl, totalHasil, "worth-second");
     })
     .catch(() => {
       exchangeRateEl.innerText = "Gagal mengambil data kurs terkini";
-      worthSecondEl.value = "";
+      setTargetContent(worthSecondEl, "", "worth-second");
     });
 }
 

@@ -33,7 +33,7 @@ function updateRate() {
 
   fetch(`https://v6.exchangerate-api.com/v6/6fd7263e0ecc73d9d2c6670c/latest/${base}`)
     .then((res) => {
-      if (!res.ok) throw new Error("Gagal memuat data dari server API");
+      if (!res.ok) throw new Error("Gagal mengambil data");
       return res.json();
     })
     .then((data) => {
@@ -45,6 +45,7 @@ function updateRate() {
       }
 
       exchangeRateEl.innerText = `1 ${base} = ${formatCurrencyID(rate)} ${target}`;
+      
       worthSecondEl.value = formatCurrencyID(amount * rate);
     })
     .catch(() => {

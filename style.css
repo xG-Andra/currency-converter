@@ -8,39 +8,110 @@ body {
     margin: 0;
     padding: 0;
 }
+
 .container {
     background-color: #FFFFE3;
     color: #8A8A7B;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 20px 30px;
+    border-radius: 8px;
     text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+h1 {
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 20px;
 }
 
 .currency-container {
-    padding: 20px;
+    padding: 15px 0;
     display: flex;
     justify-content: space-between;
-
+    align-items: center; 
+    gap: 15px;
 }
-.currency-container select {
+
+.currency-select-container {
+    position: relative;
+    width: 140px; 
+    text-align: left;
+}
+
+.currency-input {
+    width: 100%;
     padding: 10px;
-}
-.currency-container input {
-  border: 0;
-  background: transparent;
-  font-size: 25px;
-  text-align: right;
-  color: #8A8A7B;
+    border: 1px solid #8A8A7B;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #8A8A7B;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase; 
+    cursor: pointer;
+    box-sizing: border-box;
 }
 
-.currency-container input[readonly] {
-  opacity: 0.95;
+.currency-options {
+    position: absolute;
+    top: 105%;
+    left: 0;
+    width: 100%;
+    max-height: 160px; 
+    overflow-y: auto;
+    background-color: #ffffff;
+    border: 1px solid #8A8A7B;
+    border-radius: 4px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: none; 
+    z-index: 999; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
+
+.currency-options.show {
+    display: block;
+}
+
+.currency-options li {
+    padding: 10px;
+    color: #8A8A7B;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.currency-options li:hover {
+    background-color: #59B5F7;
+    color: #FFFFE3;
+}
+
+#worth-first, 
+#worth-second {
+    border: 0;
+    background: transparent;
+    font-size: 24px;
+    text-align: right;
+    color: #8A8A7B;
+    font-family: 'Courier New', Courier, monospace;
+    width: 60%; 
+}
+
+#worth-second[readonly] {
+    opacity: 0.85;
+}
+
 .exchange-rate {
-    font-size: 16px;
+    margin-top: 20px;
+    font-size: 15px;
     font-weight: 600;
+    color: #8A8A7B;
 }
-select:focus,
+
 input:focus {
     outline: 0;
 }
